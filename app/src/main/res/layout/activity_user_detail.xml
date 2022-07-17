@@ -208,10 +208,39 @@
         app:srcCompat="@drawable/push_up_round" />
 
     <Button
-        android:id="@+id/BlueTooth_check"
+        android:id="@+id/BlueTooth_check_support"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="检查蓝牙"
-        tools:layout_editor_absoluteX="284dp"
-        tools:layout_editor_absoluteY="618dp" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline21"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <Button
+        android:id="@+id/turn_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开启蓝牙"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+    <Button
+        android:id="@+id/turn_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭蓝牙"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

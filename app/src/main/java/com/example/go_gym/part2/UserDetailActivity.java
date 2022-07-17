@@ -28,17 +28,16 @@ import java.util.Set;
 public class UserDetailActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 10;//其是需要自己定义的局部常量。
     private BluetoothAdapter mBluetoothAdapter;
+
     TextView push_up_old,push_up_new,squat_old,squat_new,plank_old,plank_new;
-    Button blueTooth_check;
+    Button blueTooth_check,turn_on,turn_off;
+    Toast myToast;
 
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
-
-        //将状态栏设置为透明
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         //获取主要的控件
         push_up_old = findViewById(R.id.push_up_old);
@@ -47,7 +46,9 @@ public class UserDetailActivity extends AppCompatActivity {
         squat_new = findViewById(R.id.squat_new);
         plank_old = findViewById(R.id.plank_old);
         plank_new = findViewById(R.id.plank_new);
-        blueTooth_check = findViewById(R.id.BlueTooth_check);
+        blueTooth_check = findViewById(R.id.BlueTooth_check_support);
+        turn_on = findViewById(R.id.turn_on);
+        turn_off = findViewById(R.id.turn_off);
 
 
         push_up_old.setOnClickListener(view -> {
@@ -78,39 +79,49 @@ public class UserDetailActivity extends AppCompatActivity {
         });
 
         blueTooth_check.setOnClickListener(view -> {
-            //查看设备是否支持蓝牙
+            //查看设备当前蓝牙状态
             mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (mBluetoothAdapter == null) {
-                Toast.makeText(this, "设备不支持蓝牙！", Toast.LENGTH_SHORT).show();
+                showToast("设备不支持蓝牙！");
             } else {
-                Toast.makeText(this, "设备支持蓝牙！", Toast.LENGTH_SHORT).show();
+                if (mBluetoothAdapter.isEnabled())
+                    showToast("蓝牙状态为打开");
+                else
+                    showToast("蓝牙状态为关闭");
             }
         });
 
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    protected void onStart() {
-        super.onStart();
-        blueTooth_check.setOnClickListener(view -> {
-            if (!mBluetoothAdapter.isEnabled()) {
+        turn_on.setOnClickListener(view -> {
+            //打开蓝牙
+            if (mBluetoothAdapter.isEnabled())
+                showToast("蓝牙已经打开了");
+            else{
                 //向系统请求开启蓝牙
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);//结果返回回调到onActivityResult()
-            }else {
-                //已经开启了蓝牙
-                Toast.makeText(this,"蓝牙已经开启",Toast.LENGTH_SHORT).show();
             }
         });
+
+        turn_off.setOnClickListener(view -> {
+            //关闭蓝牙
+            if (!mBluetoothAdapter.isEnabled())
+                showToast("蓝牙已经关闭了");
+            else{
+                mBluetoothAdapter.disable();
+                showToast("成功关闭蓝牙");
+            }
+        });
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_ENABLE_BT){
-            Toast.makeText(this,"蓝牙已经开启",Toast.LENGTH_SHORT).show();
-        }
+        if(requestCode == REQUEST_ENABLE_BT)
+            showToast("成功打开蓝牙");
+        else
+            showToast("打开蓝牙失败");
     }
 
     @Override
@@ -119,5 +130,13 @@ public class UserDetailActivity extends AppCompatActivity {
         intent.setClass(UserDetailActivity.this, SelectActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void showToast(String text){
+        if (myToast == null)
+            myToast = Toast.makeText(this,text,Toast.LENGTH_SHORT);
+        else
+            myToast.setText(text);
+        myToast.show();
     }
 }
