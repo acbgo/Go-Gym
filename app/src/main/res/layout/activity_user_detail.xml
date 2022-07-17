@@ -206,4 +206,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline14"
         app:srcCompat="@drawable/push_up_round" />
+
+    <Button
+        android:id="@+id/BlueTooth_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="检查蓝牙"
+        tools:layout_editor_absoluteX="284dp"
+        tools:layout_editor_absoluteY="618dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
