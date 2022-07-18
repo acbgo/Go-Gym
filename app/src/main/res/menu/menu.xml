@@ -17,5 +17,10 @@
         android:orderInCategory="3"
         android:title="@string/turn_off" />
 
+    <item
+        android:id="@+id/bt_connected"
+        android:orderInCategory="3"
+        android:title="@string/check_device" />
+
 
 </menu>
