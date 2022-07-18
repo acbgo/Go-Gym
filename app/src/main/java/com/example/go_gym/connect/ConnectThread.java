@@ -9,6 +9,10 @@ import android.os.Handler;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+ * @todo:一个用于连接蓝牙的线程
+ * @dateTime: 2022/7/18 17:15
+ */
 public class ConnectThread extends Thread{
     private static final UUID MY_UUID = UUID.fromString(Constant.CONNECTTION_UUID);
     private final BluetoothSocket mySocket;
@@ -19,7 +23,7 @@ public class ConnectThread extends Thread{
 
     @SuppressLint("MissingPermission")
     public ConnectThread(BluetoothDevice device, BluetoothAdapter adapter, Handler handler) {
-        // U将一个临时对象分配给mmSocket，因为mmSocket是最终的
+        // U将一个临时对象分配给mySocket，因为mySocket是最终的
         BluetoothSocket tmp = null;
         myDevice = device;
         myBluetoothAdapter = adapter;

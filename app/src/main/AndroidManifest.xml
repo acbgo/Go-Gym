@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.go_gym">
 
-    /申请蓝牙权限
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
     <application
@@ -19,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Go_gym"
         tools:targetApi="31">
+        <activity
+            android:name=".part2.DeviceActivity"
+            android:exported="false" />
         <activity
             android:name=".part2.StartSportActivity"
             android:exported="false" />

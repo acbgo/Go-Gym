@@ -6,4 +6,5 @@
     <string name="BlueTooth_check_state">检查蓝牙</string>
     <string name="turn_on">打开蓝牙</string>
     <string name="turn_off">关闭蓝牙</string>
+    <string name="check_device">查看已连接设备</string>
 </resources>
