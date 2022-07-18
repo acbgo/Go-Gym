@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="SplashActivity"
-    android:background="@drawable/start_page">
+    android:layout_height="850dp"
+    android:background="@drawable/start_page"
+    tools:context="SplashActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
